@@ -1,8 +1,9 @@
 from typing import Tuple, Optional, Union, Dict, Any
+from io import BytesIO
 import torch, torch.nn as nn, numpy as np
 import matplotlib.pyplot as plt, matplotlib.gridspec as gridspec
 import torchvision.transforms as transforms
-from PIL import Image
+from PIL import Image, Image as PILImage
 from sklearn.decomposition import PCA
 from transformers import AutoModel
 from datasets import load_dataset
@@ -101,7 +102,6 @@ def visualize_pca_results_simple(
         p_low_val, p_high_val = np.percentile(pc, [p_low, p_high])
         return np.clip((pc - p_low_val) / (p_high_val - p_low_val + 1e-7), 0, 1) if p_high_val - p_low_val > 1e-7 else np.zeros_like(pc)
     
-    from io import BytesIO
     fig1 = plt.figure(figsize=(10, 5))
     gs1 = gridspec.GridSpec(1, 2, figure=fig1, wspace=0.02)
     
@@ -140,7 +140,6 @@ def visualize_pca_results_simple(
     buf2.seek(0)
     plt.close(fig2)
     
-    from PIL import Image as PILImage
     img1, img2 = PILImage.open(buf1), PILImage.open(buf2)
     combined = PILImage.new('RGB', (max(img1.width, img2.width), img1.height + img2.height), 'white')
     combined.paste(img1, (0, 0))
