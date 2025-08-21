@@ -1,0 +1,8 @@
+torch==2.7.1
+torchvision==0.22.0
+transformers==4.56.0.dev0
+datasets==3.6.0
+scikit-learn==1.7.1
+matplotlib==3.10.5
+numpy==2.3.2
+Pillow==11.3.0
